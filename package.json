@@ -1,0 +1,16 @@
+{
+  "name": "discord-account-creator",
+  "version": "1.0.0",
+  "description": "Discord Account Creator + Server Joiner",
+  "main": "join.js",
+  "scripts": {
+    "start": "node join.js",
+    "web": "npx http-server -p 8080"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "keywords": ["discord", "automation", "puppeteer"],
+  "author": "GitHub User",
+  "license": "MIT"
+}
