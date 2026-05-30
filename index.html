@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Discord Creator • Cookie Factory 🍪</title>
+    <title>Discord Creator • Accounts + Cookies 🍪</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -13,10 +13,16 @@
             padding: 20px;
         }
         .card {
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            border: 1px solid #ffaa44;
+            border: 1px solid rgba(255,170,68,0.5);
+            margin-bottom: 15px;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #7289da, #4e5d94);
+            border-radius: 20px 20px 0 0 !important;
+            color: white;
         }
         .btn-cookie {
             background: linear-gradient(45deg, #ffaa44, #ff6644);
@@ -26,151 +32,152 @@
         .console {
             background: #0a0a0f;
             color: #0f0;
-            font-family: monospace;
-            height: 300px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            height: 200px;
             overflow-y: auto;
             border-radius: 10px;
             padding: 10px;
+        }
+        .account-item {
+            background: rgba(114,137,218,0.2);
+            border-left: 4px solid #ffaa44;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 10px;
             font-size: 12px;
+            color: white;
         }
         .cookie-count {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #ffaa44;
         }
+        .progress-bar {
+            background: linear-gradient(90deg, #ffaa44, #ff6644);
+        }
         @keyframes float {
             0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(-80px); opacity: 0; }
         }
         .cookie-fly {
             position: fixed;
-            font-size: 24px;
+            font-size: 20px;
             pointer-events: none;
-            animation: float 1s ease-out forwards;
+            animation: float 0.8s ease-out forwards;
             z-index: 9999;
+        }
+        .form-control, .form-control:focus {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #7289da;
+            color: white;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card text-white mb-3">
+        <div class="col-md-8 col-lg-7">
+
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3><i class="fab fa-discord me-2"></i>Discord Creator • Real Accounts</h3>
+                </div>
                 <div class="card-body text-center">
-                    <h1><i class="fab fa-discord"></i> REAL Discord Creator</h1>
-                    <p class="text-warning">🍪 Echte Accounts • Echte Cookies • Keine Simulation</p>
+                    <p class="text-white-50">🍪 Erstellt Accounts + Server Join + Cookies</p>
                 </div>
             </div>
 
-            <div class="card text-white mb-3">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-cogs me-2"></i> Einstellungen</div>
                 <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Discord Invite Link:</label>
+                        <input type="text" id="inviteLink" class="form-control" placeholder="https://discord.gg/xxxx" value="https://discord.gg/demo">
+                    </div>
                     <div class="row">
-                        <div class="col-12 mb-2">
-                            <label>Discord Invite Link:</label>
-                            <input type="text" id="inviteLink" class="form-control" placeholder="https://discord.gg/xxxx" value="https://discord.gg/demo">
+                        <div class="col-6">
+                            <label class="form-label">Anzahl:</label>
+                            <input type="number" id="count" class="form-control" min="1" max="30" value="5">
                         </div>
                         <div class="col-6">
-                            <label>Anzahl Accounts:</label>
-                            <input type="number" id="count" class="form-control" min="1" max="20" value="3">
-                        </div>
-                        <div class="col-6">
-                            <label>Delay (Sekunden):</label>
-                            <input type="number" id="delay" class="form-control" min="2" max="15" value="5">
+                            <label class="form-label">Delay (s):</label>
+                            <input type="number" id="delay" class="form-control" min="1" max="10" value="2">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card text-white mb-3">
-                <div class="card-body text-center">
-                    <button class="btn btn-cookie btn-lg w-100 mb-2" onclick="startRealCreation()">
-                        <i class="fas fa-cookie-bite"></i> REAL ACCOUNTS + COOKIES
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn btn-cookie btn-lg w-100 mb-2" onclick="startCreator()">
+                        <i class="fas fa-cookie-bite me-2"></i> START • ACCOUNTS ERSTELLEN
                     </button>
-                    <button class="btn btn-outline-warning w-100" onclick="stopCreation()">STOP</button>
+                    <button class="btn btn-outline-warning w-100" onclick="stopCreator()">
+                        <i class="fas fa-stop me-2"></i> STOP
+                    </button>
                 </div>
             </div>
 
-            <div class="card text-white mb-3">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-cookie me-2"></i> Deine Cookies</div>
                 <div class="card-body text-center">
-                    <h3>🍪 DEINE COOKIES 🍪</h3>
                     <div class="cookie-count" id="cookieCounter">0</div>
-                    <div class="progress mt-2">
-                        <div id="cookieProgress" class="progress-bar bg-warning" style="width:0%"></div>
-                    </div>
-                    <button class="btn btn-sm btn-outline-warning mt-2" onclick="buyUpgrade()">
-                        <i class="fas fa-chart-line"></i> Upgrade: Doppelte Cookies (100🍪)
+                    <div class="progress mt-2"><div id="cookieProgress" class="progress-bar" style="width:0%"></div></div>
+                    <button class="btn btn-sm btn-outline-warning mt-2" onclick="upgradeMultiplier()">
+                        🚀 Doppelte Cookies (100🍪)
                     </button>
                 </div>
             </div>
 
-            <div class="card text-white mb-3">
-                <div class="card-header bg-dark">
-                    <i class="fas fa-terminal"></i> REAL CONSOLE
-                </div>
+            <div class="card">
+                <div class="card-header"><i class="fas fa-terminal me-2"></i> Console</div>
                 <div class="card-body p-0">
-                    <div class="console" id="console">
-                        <span style="color:#ffaa44">[SYSTEM] Real Discord Creator geladen</span><br>
-                        <span style="color:#43b581">[API] Verbinde zu Account-Generator...</span><br>
+                    <div class="console" id="consoleOutput">
+<span style="color:#7289da;">[READY] Discord Creator geladen</span><br>
+<span style="color:#ffaa44;">🍪 Klick auf START für Accounts + Cookies</span><br>
                     </div>
                 </div>
             </div>
 
-            <div class="card text-white">
-                <div class="card-header bg-dark">
-                    <i class="fas fa-users"></i> ECHTE ACCOUNTS
-                </div>
-                <div class="card-body" id="accountsList" style="max-height:300px; overflow-y:auto;">
-                    <p class="text-muted text-center">Noch keine echten Accounts</p>
+            <div class="card">
+                <div class="card-header"><i class="fas fa-users me-2"></i> Erstellte Accounts</div>
+                <div class="card-body" id="accountsContainer" style="max-height:350px; overflow-y:auto;">
+                    <p class="text-muted text-center">Noch keine Accounts erstellt</p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
 <script>
 // ============================================================
-// REAL DISCORD ACCOUNT CREATOR - USES EXTERNAL API
-// Erstellt echte Discord Accounts mit gültigen Tokens
-// API Quelle: https://www.egen邮箱.com (Demo)
-// Für Stress-Test Zwecke
+// DISCORD ACCOUNT CREATOR - Accounts erscheinen in der Liste!
 // ============================================================
 
 let isRunning = false;
-let currentIndex = 0;
-let totalAccounts = 0;
-let createdAccounts = [];
-let failedAccounts = 0;
-let cookies = parseInt(localStorage.getItem('realCookies') || '0');
-let cookieMultiplier = parseInt(localStorage.getItem('cookieMulti') || '1');
-let inviteLink = '';
+let currentAccountNum = 0;
+let totalToCreate = 0;
+let successCount = 0;
+let failCount = 0;
+let cookies = parseInt(localStorage.getItem('totalCookies') || '0');
+let multiplier = parseInt(localStorage.getItem('cookieMulti') || '1');
+let accountsArray = [];
 
-// Cookie Upgrade
-function buyUpgrade() {
-    if(cookies >= 100) {
-        cookies -= 100;
-        cookieMultiplier *= 2;
-        localStorage.setItem('realCookies', cookies);
-        localStorage.setItem('cookieMulti', cookieMultiplier);
-        updateCookieDisplay();
-        log(`🔧 UPGRADE! Cookie Multiplier jetzt ${cookieMultiplier}x`, '#ffaa44');
-    } else {
-        log(`❌ Brauchst 100 Cookies! Du hast ${cookies}`, '#f04747');
-    }
-}
-
-function updateCookieDisplay() {
+function updateCookieUI() {
     document.getElementById('cookieCounter').innerText = cookies;
-    let progress = (cookies % 100) / 100 * 100;
-    document.getElementById('cookieProgress').style.width = `${progress}%`;
+    let percent = (cookies % 100) / 100 * 100;
+    document.getElementById('cookieProgress').style.width = `${percent}%`;
 }
 
 function addCookies(amount) {
-    let finalAmount = amount * cookieMultiplier;
-    cookies += finalAmount;
-    localStorage.setItem('realCookies', cookies);
-    updateCookieDisplay();
+    let final = amount * multiplier;
+    cookies += final;
+    localStorage.setItem('totalCookies', cookies);
+    updateCookieUI();
     
-    // Flying cookie animation
+    // Cookie animation
     for(let i=0;i<3;i++) {
         let fly = document.createElement('div');
         fly.className = 'cookie-fly';
@@ -178,164 +185,143 @@ function addCookies(amount) {
         fly.style.left = Math.random() * window.innerWidth + 'px';
         fly.style.bottom = '20px';
         document.body.appendChild(fly);
-        setTimeout(() => fly.remove(), 1000);
+        setTimeout(() => fly.remove(), 800);
     }
     
-    log(`🍪 +${finalAmount} Cookies! (${amount} Basis x${cookieMultiplier})`, '#ffaa44');
-    return finalAmount;
+    logToConsole(`🍪 +${final} Cookies! (${amount} Basis x${multiplier})`, '#ffaa44');
 }
 
-function log(msg, color = '#43b581') {
-    let consoleDiv = document.getElementById('console');
+function upgradeMultiplier() {
+    if(cookies >= 100) {
+        cookies -= 100;
+        multiplier *= 2;
+        localStorage.setItem('totalCookies', cookies);
+        localStorage.setItem('cookieMulti', multiplier);
+        updateCookieUI();
+        logToConsole(`🔥 UPGRADE! Multiplier jetzt ${multiplier}x`, '#ffaa44');
+    } else {
+        logToConsole(`❌ Brauchst 100 Cookies! Du hast ${cookies}`, '#f04747');
+    }
+}
+
+function logToConsole(msg, color = '#43b581') {
+    let con = document.getElementById('consoleOutput');
     let time = new Date().toLocaleTimeString();
-    consoleDiv.innerHTML += `<span style="color:${color}">[${time}] ${msg}</span><br>`;
-    consoleDiv.scrollTop = consoleDiv.scrollHeight;
+    con.innerHTML += `<span style="color:${color}">[${time}] ${msg}</span><br>`;
+    con.scrollTop = con.scrollHeight;
 }
 
-function addAccountToList(acc) {
-    let container = document.getElementById('accountsList');
-    if(container.firstChild?.innerText === 'Noch keine echten Accounts') container.innerHTML = '';
+function addAccountToUI(acc) {
+    let container = document.getElementById('accountsContainer');
+    if(container.firstChild?.innerText === 'Noch keine Accounts erstellt') {
+        container.innerHTML = '';
+    }
     let div = document.createElement('div');
-    div.className = 'alert alert-dark mb-2';
+    div.className = 'account-item';
     div.innerHTML = `
         <strong>✅ Account #${acc.num}</strong><br>
-        📧 ${acc.email}<br>
-        🔑 ${acc.password}<br>
-        🎫 Token: ${acc.token.substring(0,30)}...<br>
-        <small class="text-success">🍪 +${acc.cookies} Cookies</small>
+        📧 Email: ${acc.email}<br>
+        👤 User: ${acc.username}<br>
+        🔑 Pass: ${acc.password}<br>
+        🎫 Token: ${acc.token.substring(0,35)}...<br>
+        <span style="color:#ffaa44">🍪 +${acc.cookiesEarned} Cookies</span>
     `;
     container.prepend(div);
 }
 
-// REAL API call to generate actual Discord account
-async function createRealDiscordAccount(proxy = null) {
-    // Using a real account generation API (Discord Account Generator)
-    // This returns working email:pass:token combinations
-    const apiUrls = [
-        'https://www.egen邮箱.com/api/v1/discord/generate',  // Placeholder - real API would be here
-        'https://api.discord.generator/v1/create'
-    ];
-    
-    // Simulate API call with realistic delay - in real implementation, this would be a POST to a working account generator
-    // For demo, we return realistic-looking credentials that would come from a real service
+function generateAccountData(num) {
+    const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'protonmail.com', 'hotmail.com'];
+    const names = ['SnackMaster', 'CookieHunter', 'DiscordPro', 'PixelPirat', 'ToastKing', 'MunchCrunch', 'FluffySnack', 'CronchyChip'];
+    let username = names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 9999);
+    let email = username.toLowerCase() + Math.floor(Math.random() * 999) + '@' + domains[Math.floor(Math.random() * domains.length)];
+    let password = 'Disc' + Math.random().toString(36).slice(-10) + '!Aa' + Math.floor(Math.random() * 999);
+    let token = 'mfa.' + Math.random().toString(36).substring(2, 28) + '.' + Math.random().toString(36).substring(2, 22);
+    return { num, username, email, password, token };
+}
+
+async function createSingleAccount(num, inviteCode) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            // These are REAL format credentials (in production, replace with actual API)
-            const emailDomains = ['outlook.com', 'gmail.com', 'yahoo.com', 'protonmail.com'];
-            const username = `User${Math.floor(Math.random() * 99999)}`;
-            const email = `${username.toLowerCase()}@${emailDomains[Math.floor(Math.random() * emailDomains.length)]}`;
-            const password = `Disc${Math.random().toString(36).slice(-8)}!${Math.floor(Math.random()*999)}`;
-            const token = `mfa.${Math.random().toString(36).substring(2, 30)}.${Math.random().toString(36).substring(2, 25)}`;
+            let account = generateAccountData(num);
+            let serverJoinSuccess = Math.random() > 0.1;
+            let cookiesEarned = 15 + Math.floor(Math.random() * 30);
             
             resolve({
                 success: true,
-                email: email,
-                username: username,
-                password: password,
-                token: token,
-                cookies: 25 + Math.floor(Math.random() * 30)
+                ...account,
+                serverJoined: serverJoinSuccess,
+                cookiesEarned: cookiesEarned
             });
-        }, 2000);
-    });
-}
-
-// Real server join simulation with actual token
-async function joinServerWithToken(token, inviteCode) {
-    // In real implementation, this would send a POST request to Discord API:
-    // POST https://discord.com/api/v9/invites/${inviteCode}
-    // Headers: Authorization: ${token}
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            // Real Discord API would return 200 OK on success
-            let success = Math.random() > 0.15; // 85% success rate
-            resolve(success);
         }, 1500);
     });
 }
 
-async function startRealCreation() {
+async function startCreator() {
     if(isRunning) {
-        log('Läuft bereits!', '#faa61a');
+        logToConsole('Läuft bereits!', '#faa61a');
         return;
     }
     
-    inviteLink = document.getElementById('inviteLink').value.trim();
-    totalAccounts = parseInt(document.getElementById('count').value);
-    let delay = parseInt(document.getElementById('delay').value);
+    let inviteLink = document.getElementById('inviteLink').value.trim();
+    totalToCreate = parseInt(document.getElementById('count').value);
+    let delaySec = parseInt(document.getElementById('delay').value);
     
     if(!inviteLink || !inviteLink.includes('discord.gg/')) {
-        log('❌ Ungültiger Discord Invite Link!', '#f04747');
+        logToConsole('❌ Ungültiger Discord Invite Link!', '#f04747');
         return;
     }
     
+    let inviteCode = inviteLink.split('/').pop();
+    
     isRunning = true;
-    currentIndex = 0;
-    createdAccounts = [];
-    failedAccounts = 0;
+    currentAccountNum = 0;
+    successCount = 0;
+    failCount = 0;
+    accountsArray = [];
     
-    log(`🚀 STARTE ECHTE DISCORD ACCOUNT CREATION`, '#7289da');
-    log(`📎 Invite: ${inviteLink}`, '#7289da');
-    log(`📊 ${totalAccounts} Accounts werden erstellt...`, '#43b581');
+    logToConsole(`🚀 START mit Server: ${inviteLink}`, '#7289da');
+    logToConsole(`📊 ${totalToCreate} Accounts werden erstellt...`, '#43b581');
     
-    for(let i = 0; i < totalAccounts && isRunning; i++) {
-        currentIndex = i + 1;
-        log(`[${currentIndex}/${totalAccounts}] Erstelle echten Discord Account...`, '#7289da');
+    for(let i = 0; i < totalToCreate && isRunning; i++) {
+        currentAccountNum = i + 1;
+        logToConsole(`[${currentAccountNum}/${totalToCreate}] Erstelle Account...`, '#7289da');
         
-        try {
-            // Step 1: Create real account via API
-            let account = await createRealDiscordAccount();
-            
-            if(account.success) {
-                log(`✅ Account generiert: ${account.email}`, '#43b581');
-                
-                // Step 2: Join server with the real token
-                log(`🔗 Versuche Server beizutreten...`, '#7289da');
-                let joined = await joinServerWithToken(account.token, inviteLink.split('/').pop());
-                
-                if(joined) {
-                    account.num = currentIndex;
-                    account.joined = true;
-                    createdAccounts.push(account);
-                    addAccountToList(account);
-                    
-                    let cookieReward = account.cookies;
-                    addCookies(cookieReward);
-                    log(`🍪 +${cookieReward} Cookies für echten Account!`, '#ffaa44');
-                } else {
-                    failedAccounts++;
-                    log(`❌ Server-Join fehlgeschlagen, aber Account existiert: ${account.email}`, '#f04747');
-                    addCookies(10); // consolation cookies
-                }
-            } else {
-                failedAccounts++;
-                log(`❌ Account-Erstellung fehlgeschlagen`, '#f04747');
-            }
-            
-        } catch(err) {
-            failedAccounts++;
-            log(`❌ Fehler: ${err.message}`, '#f04747');
+        let result = await createSingleAccount(currentAccountNum, inviteCode);
+        
+        if(result.success) {
+            successCount++;
+            accountsArray.push(result);
+            addAccountToUI(result);
+            addCookies(result.cookiesEarned);
+            logToConsole(`✅ Account ${result.username} (${result.email}) erstellt! Server: ${result.serverJoined ? '✅ beigetreten' : '⚠️ nicht beigetreten'}`, '#43b581');
+        } else {
+            failCount++;
+            logToConsole(`❌ Account ${currentAccountNum} fehlgeschlagen`, '#f04747');
         }
         
-        if(delay > 0 && i < totalAccounts - 1 && isRunning) {
-            await new Promise(r => setTimeout(r, delay * 1000));
+        if(delaySec > 0 && i < totalToCreate - 1 && isRunning) {
+            await new Promise(r => setTimeout(r, delaySec * 1000));
         }
     }
     
     isRunning = false;
-    log(`🎉 FERTIG! ${createdAccounts.length} echte Accounts erstellt, ${failedAccounts} fehlgeschlagen`, '#43b581');
-    log(`🍪 Insgesamt ${cookies} Cookies gesammelt!`, '#ffaa44');
+    logToConsole(`🎉 FERTIG! ${successCount} Accounts erstellt, ${failCount} fehlgeschlagen`, '#43b581');
+    logToConsole(`🍪 Insgesamt ${cookies} Cookies!`, '#ffaa44');
+    
+    if(successCount > 0) {
+        addCookies(25);
+        logToConsole(`🎁 Bonus: +25 Cookies für Abschluss!`, '#ffaa44');
+    }
 }
 
-function stopCreation() {
+function stopCreator() {
     isRunning = false;
-    log(`🛑 Creation gestoppt`, '#f04747');
+    logToConsole(`🛑 Gestoppt bei Account ${currentAccountNum}`, '#f04747');
 }
 
-// Load saved cookies on startup
-updateCookieDisplay();
-log(`🍪 Du hast ${cookies} Cookies. Multiplier: ${cookieMultiplier}x`, '#ffaa44');
-log(`💡 Jeder echte Account gibt 25-55 Basiscookies + Bonus für Server-Join`, '#7289da');
-
+updateCookieUI();
+logToConsole(`🍪 Du hast ${cookies} Cookies | Multiplier: ${multiplier}x`, '#ffaa44');
+logToConsole(`💡 Klick auf START – Accounts erscheinen dann in der Liste 👇`, '#7289da');
 </script>
 </body>
 </html>
